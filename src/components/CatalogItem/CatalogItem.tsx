@@ -1,8 +1,8 @@
-import { Phone } from '../../types/Phone';
+import { PhoneFromServer } from '../../types/Phone';
 import './CatalogItem.scss';
 
 interface Props {
-  phone: Phone;
+  phone: PhoneFromServer;
 }
 
 export const CatalogItem: React.FC<Props> = ({ phone }) => {

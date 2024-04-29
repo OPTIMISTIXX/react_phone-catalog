@@ -1,18 +1,5 @@
-.carousel {
-  display: flex;
-  overflow: hidden;
-
-  &__gallery {
-    display: flex;
-    overflow: hidden;
-  }
-
-  &__button {
-    width: 32px;
-  }
-}
-
-.gallery__item > img {
-  width: 1440px;
-  height: 400px;
+.slider {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
 }

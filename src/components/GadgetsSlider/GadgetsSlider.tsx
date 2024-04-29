@@ -1,42 +1,16 @@
-import { useState } from 'react';
+import ImageSlider from './ImageSlider';
 import './GadgetsSlider.scss';
 
 export const GadgetsSlider = () => {
-  const [position, setPosition] = useState(0);
-  const pictureWidth = 1440;
-
-  const handleLeftButton = () => {
-    setPosition(currentPosition => currentPosition + pictureWidth);
-  };
-
-  const handleRightButton = () => {
-    setPosition(currentPosition => currentPosition - pictureWidth);
-  };
+  const slides = [
+    { url: './img/banners/4.svg', title: '0' },
+    { url: './img/banners/1.png', title: '1' },
+    { url: './img/banners/2.png', title: '2' },
+  ];
 
   return (
-    <div className="carousel">
-      <button onClick={handleLeftButton} className="carousel__button">
-        ⇦
-      </button>
-      <ul
-        className="carousel__gallery gallery"
-        style={{
-          transform: `translateX(${position}px)`,
-        }}
-      >
-        <li className="gallery__item">
-          <img src="./img/banners/4.svg" alt="0" />
-        </li>
-        <li className="gallery__item">
-          <img src="./img/banners/4.svg" alt="1" />
-        </li>
-        <li className="gallery__item">
-          <img src="./img/banners/4.svg" alt="2" />
-        </li>
-      </ul>
-      <button onClick={handleRightButton} className="carousel__button">
-        ⇨
-      </button>
+    <div className="slider">
+      <ImageSlider slides={slides} />
     </div>
   );
 };
