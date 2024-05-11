@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { PhoneFromServer } from '../../types/Phone';
 import './CatalogItem.scss';
 
@@ -6,12 +7,14 @@ interface Props {
 }
 
 export const CatalogItem: React.FC<Props> = ({ phone }) => {
+  const linkStyles = { display: 'block' };
+
   return (
-    <>
+    <Link style={linkStyles} to={`/products/${phone.id}`}>
       <div className="grid-item__container grid-item__container--image">
         <img
           className="grid-item__image"
-          src={`../${phone.images[0]}`}
+          src={`/${phone.images[0]}`}
           alt={phone.name}
         />
       </div>
@@ -22,10 +25,8 @@ export const CatalogItem: React.FC<Props> = ({ phone }) => {
         <div className="grid-item__price">
           {phone.discount !== 0 ? (
             <>
-              <span className="price">
-                ${(phone.price - phone.discount) / 100}
-              </span>
-              <span className="discount-price">${phone.price}</span>
+              <span className="discouunt-price">${phone.priceDiscount}</span>
+              <span className="price">${phone.priceRegular}</span>
             </>
           ) : (
             <span className="price">${phone.price}</span>
@@ -58,6 +59,6 @@ export const CatalogItem: React.FC<Props> = ({ phone }) => {
           </button>
         </div>
       </div>
-    </>
+    </Link>
   );
 };

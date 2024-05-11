@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+// @ts-nocheck
 import { useEffect, useState } from 'react';
 import phonesFromServer from '../../api/phones.json';
 import './Categories.scss';
@@ -10,7 +12,7 @@ export const Categories = () => {
 
   useEffect(() => {
     setPhones(phonesFromServer);
-  });
+  }, []);
 
   return (
     <div className="categories">

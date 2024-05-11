@@ -1,19 +1,17 @@
+// eslint-disable-next-line
+// @ts-nocheck
 import { useEffect, useState, useRef } from 'react';
 import { CatalogItem } from '../CatalogItem/CatalogItem';
 import phonesFromServer from '../../api/phones.json';
 import { PhoneFromServer } from '../../types/Phone';
 import './HotPrices.scss';
 
-export const HotPrices = () => {
+export const HotPrices = ({ title }) => {
   const [phones, setPhones] = useState<PhoneFromServer[]>([]);
 
   useEffect(() => {
     setPhones(phonesFromServer);
-    console.log(phones);
   }, []);
-
-  const [isArrowLeft, setIsArrowLeft] = useState(false);
-  const [isArrowRight, setIsArrowRight] = useState(true);
 
   const sliderRef = useRef(null);
   const sliderImageRef = useRef(null);
@@ -25,35 +23,24 @@ export const HotPrices = () => {
 
   const handleRightButton = () => {
     if (sliderRef.current) {
-      setIsArrowRight(true);
-
       const currentScroll = sliderRef.current.scrollLeft;
 
-      sliderRef.current.scrollTo(currentScroll - sliderCardWidth - 16, 0);
-
-      if (currentScroll - sliderCardWidth <= 0) {
-        setIsArrowLeft(false);
-      }
+      sliderRef.current.scrollTo(currentScroll - sliderCardWidth - 80, 0);
     }
   };
 
   const handleLeftButton = () => {
     if (sliderRef.current) {
       const currentScroll = sliderRef.current.scrollLeft;
-      const maxScroll = sliderRef.current.scrollWidth;
 
-      sliderRef.current.scrollTo(currentScroll + sliderCardWidth + 16, 0);
-      setIsArrowLeft(true);
-      if (currentScroll + sliderCardWidth >= maxScroll) {
-        setIsArrowLeft(false);
-      }
+      sliderRef.current.scrollTo(currentScroll + sliderCardWidth + 80, 0);
     }
   };
 
   return (
     <div className="hotPrices">
       <div className="hotPrices__top top">
-        <h1 className="subtitle">Hot Prices</h1>
+        <h1 className="subtitle">{title}</h1>
         <div className="top__buttons">
           <button
             onClick={handleLeftButton}

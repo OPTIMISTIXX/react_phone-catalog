@@ -1,6 +1,8 @@
 import { CatalogItem } from '../CatalogItem/CatalogItem';
 import { PhoneFromServer } from '../../types/Phone';
 import './GadgetsList.scss';
+import './GadgetsList__Phone.scss';
+import './GadgetsList__Tablet.scss';
 
 type Props = {
   phones: PhoneFromServer[];

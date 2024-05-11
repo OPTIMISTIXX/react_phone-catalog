@@ -45,12 +45,14 @@ text-align: left;
   }
 }
 
-.discount-price {
-  color: #89939A
+.discouunt-price {
+  color: #313237;
 }
 
 .price {
-  color: #313237
+  margin-left: 8px;
+  color: #89939A;
+  text-decoration: line-through;
 }
 
 .characteristics {

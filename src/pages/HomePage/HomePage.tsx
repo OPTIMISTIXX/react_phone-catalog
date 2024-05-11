@@ -8,7 +8,7 @@ export const HomePage = () => {
       <div className="container">
         <GadgetsSlider />
         <Categories />
-        <HotPrices />
+        <HotPrices title={'Hot prices'} />
       </div>
     </main>
   );

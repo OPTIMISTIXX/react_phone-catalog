@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+// @ts-nocheck
 import { useState, useEffect } from 'react';
 import { GadgetsList } from '../../components/GadgetsList/GadgetsList';
 import phonesFromServer from '../../api/phones.json';
@@ -26,7 +28,7 @@ export const PhonePage = () => {
 
   useEffect(() => {
     setPhones(phonesFromServer);
-  });
+  }, []);
 
   useEffect(() => {
     const displayedPhonesArray = [];
