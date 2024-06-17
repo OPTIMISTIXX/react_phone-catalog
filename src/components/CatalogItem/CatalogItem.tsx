@@ -1,13 +1,45 @@
+import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { PhoneFromServer } from '../../types/Phone';
 import './CatalogItem.scss';
+import { useContext, useEffect, useState } from 'react';
+import { FavCartPhonesContext } from '../../contexts/FavCartPhonesContext';
 
 interface Props {
   phone: PhoneFromServer;
 }
 
 export const CatalogItem: React.FC<Props> = ({ phone }) => {
-  const linkStyles = { display: 'block' };
+  const { phonesInCart, setPhonesInCart, phonesInFav, setPhonesInFav } =
+    useContext(FavCartPhonesContext);
+  const [isFavActive, setIsFavActive] = useState(false);
+  const [isCartActive, setIsCartActive] = useState(false);
+  const linkStyles = { display: 'block', position: 'relative', zIndex: 1 };
+
+  useEffect(() => {
+    console.log(phonesInCart);
+  }, [phonesInCart]);
+
+  const handleCartButton = event => {
+    event.preventDefault();
+    setIsCartActive(!isCartActive);
+    if (isCartActive) {
+      setPhonesInCart((prevPhone) => {
+        [...prevPhone, phone]
+      });
+    }
+    console.log(phonesInCart);
+  };
+
+  const handleFavButton = event => {
+    event.preventDefault();
+    setIsFavActive(!isFavActive);
+    if (isFavActive) {
+      setPhonesInFav([...phonesInFav, phone]);
+    }
+
+    console.log(phonesInFav);
+  };
 
   return (
     <Link style={linkStyles} to={`/products/${phone.id}`}>
@@ -51,11 +83,25 @@ export const CatalogItem: React.FC<Props> = ({ phone }) => {
       </div>
       <div className="grid-item__container grid-item__container--buttons">
         <div className="grid-item__buttons card-button">
-          <button type="button" className="card-button__cart card-button__item">
-            Add to cart
+          <button
+            onClick={handleCartButton}
+            type="button"
+            className={cn('card-button__cart card-button__item', {
+              'card-button__cart--active': isCartActive,
+            })}
+          >
+            {isCartActive ? 'Added to card' : 'Add to cart'}
           </button>
-          <button type="button" className="card-button__fav card-button__item">
-            <img src="../img/svg/favorites.svg" alt="fav" />
+          <button
+            onClick={handleFavButton}
+            type="button"
+            className="card-button__fav card-button__item"
+          >
+            {isFavActive ? (
+              <img src="../img/svg/favorites_active.svg" alt="fav_active" />
+            ) : (
+              <img src="../img/svg/favorites.svg" alt="fav" />
+            )}
           </button>
         </div>
       </div>

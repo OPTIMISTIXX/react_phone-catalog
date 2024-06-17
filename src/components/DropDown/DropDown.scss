@@ -20,6 +20,7 @@
     background-color: #fff;
     @include flex-space_between-center;
     padding: 10px 12px;
+    cursor: pointer;
 
     &:hover {
       border: 1px solid #89939A;
@@ -35,7 +36,9 @@
   }
 
   &__menu {
+    position: relative;
     display: none;
+    z-index: 5;
   }
 
   &__item {

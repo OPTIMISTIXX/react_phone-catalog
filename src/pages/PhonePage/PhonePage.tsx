@@ -2,7 +2,6 @@
 // @ts-nocheck
 import { useState, useEffect } from 'react';
 import { GadgetsList } from '../../components/GadgetsList/GadgetsList';
-import phonesFromServer from '../../api/phones.json';
 import { PhoneFromServer } from '../../types/Phone';
 import { DropDown } from '../../components/DropDown';
 import { Pagination } from '../../components/Pagination';
@@ -20,25 +19,57 @@ export const PhonePage = () => {
   const [displayedPhones, setDisplayedPhones] = useState<PhoneFromServer[]>([]);
   const [searchParams] = useSearchParams();
 
-  const sortedPhones = phones;
-
   const sortBy = searchParams.get('sort');
-  const perPage = searchParams.get('perPage') || sortedPhones.length.toString();
-  const currentPage = searchParams.get('page') || 1;
+  const perPage = parseInt(searchParams.get('perPage')) || phones.length;
+  const currentPage = parseInt(searchParams.get('page')) || 1;
 
   useEffect(() => {
-    setPhones(phonesFromServer);
+    const fetchPhones = async () => {
+      try {
+        const response = await fetch('api/phones.json');
+
+        if (!response.ok) {
+          throw new Error('response is not ok');
+        }
+
+        const data = await response.json();
+
+        setPhones(data);
+      } catch (error) {
+        console.log('error fetching phones', error);
+      }
+    };
+
+    fetchPhones();
   }, []);
 
   useEffect(() => {
-    const displayedPhonesArray = [];
+    let sortedPhones = [...phones];
 
-    for (let i = 0; i < sortedPhones.length; i += +perPage) {
-      displayedPhonesArray.push(sortedPhones.slice(i, i + +perPage));
+    if (sortBy) {
+      sortedPhones = sortedPhones.sort((a, b) => {
+        switch (sortBy) {
+          case 'name':
+            return a.name.localeCompare(b.name);
+          case 'price':
+            return a.price - b.price;
+          case 'rating':
+            return b.rating - a.rating;
+          default:
+            return 0;
+        }
+      });
     }
 
-    setDisplayedPhones(displayedPhonesArray[+currentPage - 1] || []);
-  }, [sortBy, perPage, currentPage, sortedPhones]);
+    const startIndex = (currentPage - 1) * perPage;
+
+    const paginatedPhones = sortedPhones.slice(
+      startIndex,
+      startIndex + perPage,
+    );
+
+    setDisplayedPhones(paginatedPhones);
+  }, [sortBy, perPage, currentPage, phones]);
 
   return (
     <main className="main">
@@ -55,7 +86,7 @@ export const PhonePage = () => {
         <Pagination
           total={phones.length}
           perPage={perPage}
-          currentPage={+currentPage}
+          currentPage={currentPage}
         />
         {/* // )} */}
       </div>

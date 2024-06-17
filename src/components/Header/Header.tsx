@@ -1,4 +1,4 @@
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { NavItem } from '../NavItem';
 import { Aside } from './Aside/Aside';
 import './Header.scss';

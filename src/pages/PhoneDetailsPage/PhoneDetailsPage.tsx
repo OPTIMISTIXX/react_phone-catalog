@@ -10,25 +10,29 @@ import { Phone } from '../../types/Phone';
 import './PhoneDetailsPage.scss';
 
 export const PhoneDetailsPage = () => {
+  const [imgUrl, setImgUrl] = useState();
   const { productId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname;
   const splittedUrl = path.split('/');
   const splittedPhoneId = splittedUrl[splittedUrl.length - 1];
-
   const [phone, setPhone] = useState<Phone | null>(null);
 
+  const handleImgButton = imageUrlArg => {
+    setImgUrl(imageUrlArg);
+  };
+
   useEffect(() => {
-    console.log(splittedPhoneId, phonesFromServer);
     const foundPhone = phonesFromServer.find(p => p.id === splittedPhoneId);
-    console.log(foundPhone)
+
     if (foundPhone) {
       setPhone(foundPhone);
+      console.log(foundPhone);
     }
-  }, [phone, splittedPhoneId]);
+  }, [splittedPhoneId]);
 
-  const handleChangePhone = (newPhoneCapacity: string) => {
+  const handleChangeCapacity = (newPhoneCapacity: string) => {
     if (!phone) {
       return;
     }
@@ -36,11 +40,21 @@ export const PhoneDetailsPage = () => {
     const arrayWithCapacity = phone.id.split('-');
     const capacityString = arrayWithCapacity[3];
 
-    // console.log(phone.id.replace(capacityString, newPhoneCapacity));
-
-    const newId = phone.id.replace(capacityString, newPhoneCapacity);
-
+    const newId = phone.id.replace(capacityString, newPhoneCapacity.toLowerCase());
+    console.log(capacityString)
     navigate(`/products/${newId}`);
+  };
+
+  const handleChangeColor = (color: string) => {
+    if (!phone) {
+      return;
+    }
+
+    const arrayWithColor = phone.id.split('-');
+    const colorString = arrayWithColor[4];
+    const newColor = phone.id.replace(colorString, color);
+
+    navigate(`/products/${newColor}`);
   };
 
   return (
@@ -55,12 +69,20 @@ export const PhoneDetailsPage = () => {
                 <ul className="details-top__list">
                   {phone.images.map((img, index) => (
                     <li key={index} className="details-top__item">
-                      <img src={`/${img}`} alt={`${index}`} />
+                      <button
+                        onClick={() => handleImgButton(img)}
+                        className="details-top__button"
+                      >
+                        <img src={`/${img}`} alt={`${index}`} />
+                      </button>
                     </li>
                   ))}
                 </ul>
                 <div className="details-top__img">
-                  <img src={`/${phone.images[0]}`} alt="Main image" />
+                  <img
+                    src={!imgUrl ? `/${phone.images[0]}` : `/${imgUrl}`}
+                    alt="Main image"
+                  />
                 </div>
                 <div className="details-top__buying buying">
                   <div className="buying__colors colors">
@@ -71,7 +93,12 @@ export const PhoneDetailsPage = () => {
                           style={{ backgroundColor: color }}
                           key={color}
                           className="colors__color"
-                        />
+                        >
+                          <button
+                            className="colors__button"
+                            onClick={() => handleChangeColor(color)}
+                          ></button>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -79,7 +106,7 @@ export const PhoneDetailsPage = () => {
                     <div className="buying__title">Select capacity</div>
                     {phone.capacityAvailable.map(capacity => (
                       <button
-                        onClick={() => handleChangePhone(capacity)}
+                        onClick={() => handleChangeCapacity(capacity)}
                         key={capacity}
                         className="capacity__button"
                       >

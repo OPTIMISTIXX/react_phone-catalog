@@ -1,16 +1,30 @@
 // eslint-disable-next-line
 // @ts-nocheck
-import { useEffect, useState, useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { CatalogItem } from '../CatalogItem/CatalogItem';
-import phonesFromServer from '../../api/phones.json';
-import { PhoneFromServer } from '../../types/Phone';
 import './HotPrices.scss';
 
 export const HotPrices = ({ title }) => {
   const [phones, setPhones] = useState<PhoneFromServer[]>([]);
 
   useEffect(() => {
-    setPhones(phonesFromServer);
+    const fetchPhones = async () => {
+      try {
+        const response = await fetch('api/phones.json');
+
+        if (!response.ok) {
+          throw new Error('response is not ok');
+        }
+
+        const data = await response.json();
+
+        setPhones(data);
+      } catch (error) {
+        console.log('error fetching phones', error);
+      }
+    };
+
+    fetchPhones();
   }, []);
 
   const sliderRef = useRef(null);

@@ -1,4 +1,4 @@
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Aside.scss';
 
 const getNavLinkClass = ({ isActive }: { isActive: boolean }) => {

@@ -1,3 +1,12 @@
+import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs';
+import { GadgetsList } from '../../components/GadgetsList/GadgetsList';
 export const CartPage = () => {
-  return <h1>Cart Page</h1>;
+
+  return (
+    <main className="main">
+      <div className="container">
+        <BreadCrumbs pageName="Favorites" />
+      </div>
+    </main>
+  );
 };
