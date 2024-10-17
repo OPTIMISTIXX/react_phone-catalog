@@ -36,6 +36,5 @@ export type PhoneFromServer = {
   camera: string;
   zoom: string;
   cell: string[];
-  price: number;
-  discount: number;
+  count?: number;
 };

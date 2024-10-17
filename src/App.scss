@@ -5,6 +5,9 @@
   src: url('../public/fonts/Mont-Regular.otf');
 }
 
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   position: relative;

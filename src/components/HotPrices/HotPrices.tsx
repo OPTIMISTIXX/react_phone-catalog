@@ -20,7 +20,7 @@ export const HotPrices = ({ title }) => {
 
         setPhones(data);
       } catch (error) {
-        console.log('error fetching phones', error);
+        throw new Error('error fetching phones', error);
       }
     };
 
@@ -35,19 +35,19 @@ export const HotPrices = ({ title }) => {
     sliderCardWidth = sliderImageRef.current.offsetWidth;
   }
 
-  const handleRightButton = () => {
-    if (sliderRef.current) {
-      const currentScroll = sliderRef.current.scrollLeft;
-
-      sliderRef.current.scrollTo(currentScroll - sliderCardWidth - 80, 0);
-    }
-  };
-
   const handleLeftButton = () => {
     if (sliderRef.current) {
       const currentScroll = sliderRef.current.scrollLeft;
 
-      sliderRef.current.scrollTo(currentScroll + sliderCardWidth + 80, 0);
+      sliderRef.current.scrollTo(currentScroll - sliderCardWidth + 80, 0);
+    }
+  };
+
+  const handleRightButton = () => {
+    if (sliderRef.current) {
+      const currentScroll = sliderRef.current.scrollLeft;
+
+      sliderRef.current.scrollTo(currentScroll + sliderCardWidth - 80, 0);
     }
   };
 

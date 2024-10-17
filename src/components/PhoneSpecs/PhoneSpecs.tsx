@@ -1,4 +1,10 @@
-export const PhoneSpecs = ({ phone }) => {
+import { PhoneFromServer } from '../../types/Phone';
+
+interface Props {
+  phone: PhoneFromServer;
+}
+
+export const PhoneSpecs: React.FC<Props> = ({ phone }) => {
   return (
     <ul className="grid-item__characteristics characteristics">
       <li className="characteristics__screen characteristics-info">

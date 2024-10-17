@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import cn from 'classnames';
 import './DropDown.scss';
 import { SearchLink } from '../SearchLink/SearchLink';
@@ -20,33 +20,37 @@ interface Props {
 
 export const DropDown: React.FC<Props> = ({ title, dropDownData }) => {
   const [isDropDownActive, setIsDropDownActive] = useState(false);
+  const dropDownRef = useRef<HTMLDivElement>(null);
 
-  const handleBlur = (e: React.FocusEvent<HTMLDivElement, Element>) => {
-    if (!e.currentTarget.contains(e.relatedTarget)) {
-      setIsDropDownActive(!isDropDownActive);
-    }
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        dropDownRef.current &&
+        !dropDownRef.current.contains(e.target as Node)
+      ) {
+        setIsDropDownActive(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleButton = () => {
+    setIsDropDownActive(!isDropDownActive);
   };
 
   return (
     <div
+      ref={dropDownRef}
       className={cn('dropdown', { 'is-active': isDropDownActive })}
-      onBlur={handleBlur}
     >
       <div className="dropdown__label">{title}</div>
-      <button
-        type="button"
-        className="dropdown__button"
-        onClick={() => setIsDropDownActive(!isDropDownActive)}
-      >
+      <button type="button" className="dropdown__button" onClick={handleButton}>
         <span className="dropdown__title">{dropDownData[0].title}</span>
-        <span>
-          <i
-            className={cn('ico', {
-              'ico-down': !isDropDownActive,
-              'ico-up': isDropDownActive,
-            })}
-          />
-        </span>
       </button>
       <div className="dropdown__menu">
         {dropDownData.map(el => (

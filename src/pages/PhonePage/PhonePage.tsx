@@ -20,7 +20,8 @@ export const PhonePage = () => {
   const [searchParams] = useSearchParams();
 
   const sortBy = searchParams.get('sort');
-  const perPage = parseInt(searchParams.get('perPage')) || phones.length;
+
+  const perPage = parseInt(searchParams.get('perPage')) || 4;
   const currentPage = parseInt(searchParams.get('page')) || 1;
 
   useEffect(() => {
@@ -36,7 +37,7 @@ export const PhonePage = () => {
 
         setPhones(data);
       } catch (error) {
-        console.log('error fetching phones', error);
+        throw new Error(error);
       }
     };
 
@@ -44,17 +45,13 @@ export const PhonePage = () => {
   }, []);
 
   useEffect(() => {
-    let sortedPhones = [...phones];
-
     if (sortBy) {
-      sortedPhones = sortedPhones.sort((a, b) => {
+      phones.sort((a, b) => {
         switch (sortBy) {
           case 'name':
             return a.name.localeCompare(b.name);
           case 'price':
-            return a.price - b.price;
-          case 'rating':
-            return b.rating - a.rating;
+            return a.priceDiscount - b.priceDiscount;
           default:
             return 0;
         }
@@ -63,10 +60,7 @@ export const PhonePage = () => {
 
     const startIndex = (currentPage - 1) * perPage;
 
-    const paginatedPhones = sortedPhones.slice(
-      startIndex,
-      startIndex + perPage,
-    );
+    const paginatedPhones = phones.slice(startIndex, startIndex + perPage);
 
     setDisplayedPhones(paginatedPhones);
   }, [sortBy, perPage, currentPage, phones]);
@@ -82,13 +76,11 @@ export const PhonePage = () => {
           <DropDown title="items on page" dropDownData={perPageVariants} />
         </div>
         <GadgetsList phones={displayedPhones} />
-        {/* {+perPage < phones.length && ( */}
         <Pagination
           total={phones.length}
           perPage={perPage}
           currentPage={currentPage}
         />
-        {/* // )} */}
       </div>
     </main>
   );

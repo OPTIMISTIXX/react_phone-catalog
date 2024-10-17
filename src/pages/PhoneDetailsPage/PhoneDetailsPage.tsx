@@ -1,25 +1,24 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs';
 import { PhoneDetails } from '../../components/PhoneDetails/PhoneDetails';
 import { PhoneSpecs } from '../../components/PhoneSpecs/PhoneSpecs';
 import { HotPrices } from '../../components/HotPrices/HotPrices';
 import phonesFromServer from '../../api/phones.json';
-import { Phone } from '../../types/Phone';
+import { PhoneFromServer } from '../../types/Phone';
 import './PhoneDetailsPage.scss';
 
 export const PhoneDetailsPage = () => {
-  const [imgUrl, setImgUrl] = useState();
-  const { productId } = useParams();
+  const [imgUrl, setImgUrl] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname;
   const splittedUrl = path.split('/');
   const splittedPhoneId = splittedUrl[splittedUrl.length - 1];
-  const [phone, setPhone] = useState<Phone | null>(null);
+  const [phone, setPhone] = useState<PhoneFromServer | null>(null);
 
-  const handleImgButton = imageUrlArg => {
+  const handleImgButton = (imageUrlArg: string) => {
     setImgUrl(imageUrlArg);
   };
 
@@ -28,9 +27,12 @@ export const PhoneDetailsPage = () => {
 
     if (foundPhone) {
       setPhone(foundPhone);
-      console.log(foundPhone);
     }
   }, [splittedPhoneId]);
+
+  useEffect(() => {
+    setImgUrl('');
+  }, [path]);
 
   const handleChangeCapacity = (newPhoneCapacity: string) => {
     if (!phone) {
@@ -40,8 +42,11 @@ export const PhoneDetailsPage = () => {
     const arrayWithCapacity = phone.id.split('-');
     const capacityString = arrayWithCapacity[3];
 
-    const newId = phone.id.replace(capacityString, newPhoneCapacity.toLowerCase());
-    console.log(capacityString)
+    const newId = phone.id.replace(
+      capacityString,
+      newPhoneCapacity.toLowerCase(),
+    );
+
     navigate(`/products/${newId}`);
   };
 

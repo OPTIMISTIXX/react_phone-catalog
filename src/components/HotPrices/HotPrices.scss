@@ -23,6 +23,14 @@
 .card-slider__button-left, .card-slider__button-right {
   width: 32px;
   height: 32px;
+  border: 1px solid#ecf0f1;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.card-slider__button-left:hover, .card-slider__button-right:hover {
+  border: 1px solid #313237 ;
 }
 
 .card-slider__button-left {

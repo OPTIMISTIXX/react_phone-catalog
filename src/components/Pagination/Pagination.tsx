@@ -1,7 +1,7 @@
 import React from 'react';
-
 import { SearchLink } from '../SearchLink/SearchLink';
 import './Pagination.scss';
+import classNames from 'classnames';
 
 type Props = {
   total: number;
@@ -58,7 +58,12 @@ export const Pagination: React.FC<Props> = ({
         </SearchLink>
       </li>
       {paginationPageCountArray.map(el => (
-        <li key={el} className="pagination__item">
+        <li
+          key={el}
+          className={classNames('pagination__item', {
+            'pagination__item--active': currentPage === el,
+          })}
+        >
           <SearchLink
             className="pagination__link"
             newParams={{ page: el.toString() }}

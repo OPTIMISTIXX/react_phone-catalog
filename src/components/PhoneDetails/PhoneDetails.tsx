@@ -1,29 +1,72 @@
 import cn from 'classnames';
-import { useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import { FavCartPhonesContext } from '../../contexts/FavCartPhonesContext';
+import { PhoneFromServer } from '../../types/Phone';
 
-export const PhoneDetails = ({ phone }) => {
-  const [isFavActive, setIsFavActive] = useState(false);
-  const [isCartActive, setIsCartActive] = useState(false);
-  const handleCartButton = event => {
+type Props = {
+  phone: PhoneFromServer;
+};
+
+export const PhoneDetails: React.FC<Props> = ({ phone }) => {
+  const {
+    phonesInCart,
+    setPhonesInCart,
+    phonesInFav,
+    setPhonesInFav,
+    setSelectedPhonesInCartCount,
+    setSelectedPhonesInFavCount,
+  } = useContext(FavCartPhonesContext);
+
+  useEffect(() => {
+    setSelectedPhonesInFavCount(phonesInFav.length);
+  }, [setSelectedPhonesInFavCount, phonesInFav]);
+
+  useEffect(() => {
+    setSelectedPhonesInCartCount(phonesInCart.length);
+  }, [setSelectedPhonesInCartCount, phonesInCart]);
+
+  const [isFavActive, setIsFavActive] = useState(
+    phonesInFav.some(favtPhone => favtPhone.id === phone.id),
+  );
+  const [isCartActive, setIsCartActive] = useState(
+    phonesInCart.some(cartPhone => cartPhone.id === phone.id),
+  );
+  const handleCartButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setIsCartActive(!isCartActive);
+
+    setPhonesInCart(prevPhones => {
+      if (isCartActive) {
+        return prevPhones.filter(cartPhone => cartPhone.id !== phone.id);
+      } else {
+        return [...prevPhones, phone];
+      }
+    });
   };
 
-  const handleFavButton = event => {
+  const handleFavButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setIsFavActive(!isFavActive);
+
+    setPhonesInFav(prevPhones => {
+      if (isFavActive) {
+        return prevPhones.filter(favPhone => favPhone.id !== phone.id);
+      } else {
+        return [...prevPhones, phone];
+      }
+    });
   };
 
   return (
     <>
       <div className="grid-item__price">
-        {phone.discount !== 0 ? (
+        {phone.priceDiscount !== 0 ? (
           <>
             <span className="discouunt-price">${phone.priceDiscount}</span>
             <span className="price">${phone.priceRegular}</span>
           </>
         ) : (
-          <span className="price">${phone.price}</span>
+          <span className="price">${phone.priceRegular}</span>
         )}
       </div>
       <div className="grid-item__buttons card-button">

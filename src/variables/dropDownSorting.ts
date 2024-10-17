@@ -1,5 +1,4 @@
 export const sortingByVariants = [
-  { title: 'Newest', params: { sort: 'age' } },
   { title: 'Alphabetically', params: { sort: 'name' } },
   { title: 'Cheapest', params: { sort: 'price' } },
 ];

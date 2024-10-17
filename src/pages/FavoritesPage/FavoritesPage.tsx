@@ -4,7 +4,7 @@ import { GadgetsList } from '../../components/GadgetsList/GadgetsList';
 import { FavCartPhonesContext } from '../../contexts/FavCartPhonesContext';
 
 export const FavoritesPage = () => {
-  const phonesInFav = useContext(FavCartPhonesContext);
+  const { phonesInFav } = useContext(FavCartPhonesContext);
 
   return (
     <main className="main">

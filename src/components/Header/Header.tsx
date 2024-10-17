@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { NavItem } from '../NavItem';
 import { Aside } from './Aside/Aside';
 import './Header.scss';
 import './Header__Tablet.scss';
 import './Header__Phone.scss';
+import { useContext } from 'react';
+import { FavCartPhonesContext } from '../../contexts/FavCartPhonesContext';
 
 const getNavLinkClass = ({ isActive }: { isActive: boolean }) => {
   return isActive ? 'nav__link nav__link--active' : 'nav__link';
@@ -14,9 +17,16 @@ const getHeaderActionClass = ({ isActive }: { isActive: boolean }) => {
 };
 
 export const Header = () => {
+  const { selectedPhonesInCartCount, selectedPhonesInFavCount } =
+    useContext(FavCartPhonesContext);
+  const [isAside, setIsAside] = useState(false);
+  const handleBurger = () => {
+    setIsAside(true);
+  };
+
   return (
     <>
-      <header className="header">
+      <header id="header" className="header">
         <nav className="header__nav nav">
           <NavLink className="nav__link" to="./">
             <img
@@ -48,25 +58,30 @@ export const Header = () => {
             </li>
           </ul>
         </nav>
-        <a
-          href="#aside"
+        <button
+          onClick={handleBurger}
           aria-label="open menu button"
           className="header__burger"
         >
           <i className="burger-ico burger-ico-open" />
-        </a>
+        </button>
 
         <div className="header__actions">
           <NavLink className={getHeaderActionClass} to="/favorites">
-            <NavItem type="fav"></NavItem>
+            <NavItem
+              selectedPhonesCount={selectedPhonesInFavCount}
+              type="fav"
+            ></NavItem>
           </NavLink>
           <NavLink className={getHeaderActionClass} to="/cart">
-            <NavItem type="cart"></NavItem>
+            <NavItem
+              selectedPhonesCount={selectedPhonesInCartCount}
+              type="cart"
+            />
           </NavLink>
         </div>
       </header>
-
-      <Aside />
+      <Aside isAside={isAside} setIsAside={setIsAside} />
     </>
   );
 };

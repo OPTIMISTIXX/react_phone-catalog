@@ -5,15 +5,11 @@ type Props = Omit<LinkProps, 'to'> & {
   newParams: SearchParams;
 };
 
-export const SearchLink: React.FC<Props> = ({
-  children,
-  newParams,
-  ...props
-}) => {
+export const SearchLink: React.FC<Props> = ({ children, newParams }) => {
   const [searchParams] = useSearchParams();
 
   return (
-    <Link {...props} to={{ search: getSearchWith(searchParams, newParams) }}>
+    <Link to={{ search: getSearchWith(searchParams, newParams) }}>
       {children}
     </Link>
   );

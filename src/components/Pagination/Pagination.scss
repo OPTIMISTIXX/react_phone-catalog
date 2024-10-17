@@ -4,7 +4,29 @@
   &__item {
     width: 32px;
     height: 32px;
-    border: 1px solid #B4BDC3;
+    border: 1px solid #e2e6e9;
+    display: flex;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: center;
+  }
+
+  &__item > a {
+    padding: 15% 30%;
+    color: #000;
+  }
+
+  &__item:hover {
+    border: 1px solid black;
+  }
+
+  &__item--active {
+    background: #313237;
+  }
+
+  &__item--active > a {
+    color: #fff;
   }
 
   &__link {

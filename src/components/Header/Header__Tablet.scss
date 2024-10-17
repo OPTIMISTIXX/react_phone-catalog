@@ -1,7 +1,22 @@
+.header__burger {
+  display: none;
+  border: none;
+  background: none;
+}
+
 @media (min-width:320px) and (max-width:720px) {
   .header {
     padding: 16px;
+
+    &__action {
+      width: 50%;
+    }
   }
+
+  .header__burger {
+    display: block;
+  }
+
   .catalog-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(200px, 1fr));

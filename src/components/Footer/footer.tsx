@@ -19,10 +19,10 @@ export const Footer = () => {
             <Link className="block__text">RIGHTS</Link>
           </div>
           <div className="footer__button footer__block block">
-            <div className="block__container">
-              <Link className="block__text--thin">Back to top</Link>
-              <Link to="button" className="block__button" />
-            </div>
+            <a href="#header" className="block__container">
+              <span className="block__text--thin">Back to top</span>
+              <div className="block__button" />
+            </a>
           </div>
         </div>
       </footer>

@@ -1,12 +1,12 @@
 import { Categories } from '../../components/Categories/Categories';
-import { GadgetsSlider } from '../../components/GadgetsSlider/GadgetsSlider';
 import { HotPrices } from '../../components/HotPrices/HotPrices';
+import SwiperSlider from '../../components/SwiperSlider/SwiperSlider';
 
 export const HomePage = () => {
   return (
     <main className="main">
       <div className="container">
-        <GadgetsSlider />
+        <SwiperSlider />
         <Categories />
         <HotPrices title={'Hot prices'} />
       </div>

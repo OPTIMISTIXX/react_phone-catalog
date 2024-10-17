@@ -1,3 +1,4 @@
+import React from 'react';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { PhoneFromServer } from '../../types/Phone';
@@ -10,39 +11,61 @@ interface Props {
 }
 
 export const CatalogItem: React.FC<Props> = ({ phone }) => {
-  const { phonesInCart, setPhonesInCart, phonesInFav, setPhonesInFav } =
-    useContext(FavCartPhonesContext);
+  const {
+    phonesInCart,
+    setPhonesInCart,
+    phonesInFav,
+    setPhonesInFav,
+    setSelectedPhonesInCartCount,
+    setSelectedPhonesInFavCount,
+  } = useContext(FavCartPhonesContext);
   const [isFavActive, setIsFavActive] = useState(false);
   const [isCartActive, setIsCartActive] = useState(false);
-  const linkStyles = { display: 'block', position: 'relative', zIndex: 1 };
 
   useEffect(() => {
-    console.log(phonesInCart);
-  }, [phonesInCart]);
+    setIsCartActive(phonesInCart.some(cartPhone => phone.id === cartPhone.id));
+    setIsFavActive(phonesInFav.some(favPhone => favPhone.id === phone.id));
+  }, [phonesInCart, phonesInFav, phone.id]);
 
-  const handleCartButton = event => {
+  useEffect(() => {
+    setSelectedPhonesInFavCount(phonesInFav.length);
+  }, [setSelectedPhonesInFavCount, phonesInFav]);
+
+  useEffect(() => {
+    setSelectedPhonesInCartCount(phonesInCart.length);
+  }, [setSelectedPhonesInCartCount, phonesInCart]);
+
+  const handleCartButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setIsCartActive(!isCartActive);
-    if (isCartActive) {
-      setPhonesInCart((prevPhone) => {
-        [...prevPhone, phone]
-      });
-    }
-    console.log(phonesInCart);
+    setPhonesInCart(prevPhones => {
+      if (isCartActive) {
+        return prevPhones.filter(cartPhone => cartPhone.id !== phone.id);
+      } else {
+        return [...prevPhones, phone];
+      }
+    });
+    setSelectedPhonesInCartCount(prevCount =>
+      isCartActive ? prevCount - 1 : prevCount + 1,
+    );
   };
 
-  const handleFavButton = event => {
+  const handleFavButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setIsFavActive(!isFavActive);
-    if (isFavActive) {
-      setPhonesInFav([...phonesInFav, phone]);
-    }
+    setPhonesInFav(prevPhone => {
+      if (isFavActive) {
+        return phonesInFav.filter(favPhone => phone.id !== favPhone.id);
+      } else {
+        return [...prevPhone, phone];
+      }
+    });
 
-    console.log(phonesInFav);
+    setSelectedPhonesInFavCount(phonesInFav.length);
   };
 
   return (
-    <Link style={linkStyles} to={`/products/${phone.id}`}>
+    <Link className="gird-item__link" to={`/products/${phone.id}`}>
       <div className="grid-item__container grid-item__container--image">
         <img
           className="grid-item__image"
@@ -55,13 +78,13 @@ export const CatalogItem: React.FC<Props> = ({ phone }) => {
       </div>
       <div className="grid-item__container">
         <div className="grid-item__price">
-          {phone.discount !== 0 ? (
+          {phone.priceDiscount !== 0 ? (
             <>
               <span className="discouunt-price">${phone.priceDiscount}</span>
               <span className="price">${phone.priceRegular}</span>
             </>
           ) : (
-            <span className="price">${phone.price}</span>
+            <span className="price">${phone.priceRegular}</span>
           )}
         </div>
       </div>

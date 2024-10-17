@@ -3,12 +3,13 @@
     &__container {
       flex-wrap: wrap;
       flex-direction: column;
+      gap: 20px;
     }
 
-    &__text {
-      flex-direction: column;
-      align-self: flex-start;
-    }
+    // &__text {
+    //   flex-direction: column;
+    //   align-self: flex-start;
+    // }
 
     &__button {
       align-self: center;
