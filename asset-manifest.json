@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "./static/css/main.18762e65.css",
-    "main.js": "./static/js/main.e3ce65b4.js",
+    "main.js": "./static/js/main.f2d000b9.js",
     "static/media/Mont-Regular.otf": "./static/media/Mont-Regular.1d26d89f7339866d3133.otf",
     "static/media/category-accessories.png": "./static/media/category-accessories.b914f4124f0dab3439fb.png",
     "static/media/category-tablets.png": "./static/media/category-tablets.ed3dd9df51129690126b.png",
@@ -16,10 +16,10 @@
     "static/media/slider-arrow-left.svg": "./static/media/slider-arrow-left.6b099a50c157f16fe043.svg",
     "index.html": "./index.html",
     "main.18762e65.css.map": "./static/css/main.18762e65.css.map",
-    "main.e3ce65b4.js.map": "./static/js/main.e3ce65b4.js.map"
+    "main.f2d000b9.js.map": "./static/js/main.f2d000b9.js.map"
   },
   "entrypoints": [
     "static/css/main.18762e65.css",
-    "static/js/main.e3ce65b4.js"
+    "static/js/main.f2d000b9.js"
   ]
 }
