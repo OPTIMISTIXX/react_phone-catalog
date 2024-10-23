@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "./static/css/main.18762e65.css",
-    "main.js": "./static/js/main.f2d000b9.js",
-    "static/media/Mont-Regular.otf": "./static/media/Mont-Regular.1d26d89f7339866d3133.otf",
-    "static/media/category-accessories.png": "./static/media/category-accessories.b914f4124f0dab3439fb.png",
-    "static/media/category-tablets.png": "./static/media/category-tablets.ed3dd9df51129690126b.png",
-    "static/media/category-phones.png": "./static/media/category-phones.464b59621d37fd37fbe8.png",
-    "static/media/cart.svg": "./static/media/cart.1962e42406793fa66f0d.svg",
-    "static/media/favorites.svg": "./static/media/favorites.670cf5136eb8aecd15dc.svg",
-    "static/media/cross.svg": "./static/media/cross.6e7f15f7413e962f7549.svg",
-    "static/media/close.svg": "./static/media/close.0594ac0ef702db8fbc79.svg",
-    "static/media/open.svg": "./static/media/open.744ac0b04d84e4feeeb5.svg",
-    "static/media/arrow-up.svg": "./static/media/arrow-up.dfbbf9e35fa2ce765e74.svg",
-    "static/media/slider-arrow-right.svg": "./static/media/slider-arrow-right.6ea4dc179740ba122e44.svg",
-    "static/media/slider-arrow-left.svg": "./static/media/slider-arrow-left.6b099a50c157f16fe043.svg",
-    "index.html": "./index.html",
-    "main.18762e65.css.map": "./static/css/main.18762e65.css.map",
-    "main.f2d000b9.js.map": "./static/js/main.f2d000b9.js.map"
+    "main.css": "/react_phone-catalog/static/css/main.fd51d1f8.css",
+    "main.js": "/react_phone-catalog/static/js/main.4cfab846.js",
+    "static/media/Mont-Regular.otf": "/react_phone-catalog/static/media/Mont-Regular.1d26d89f7339866d3133.otf",
+    "static/media/category-accessories.png": "/react_phone-catalog/static/media/category-accessories.b914f4124f0dab3439fb.png",
+    "static/media/category-tablets.png": "/react_phone-catalog/static/media/category-tablets.ed3dd9df51129690126b.png",
+    "static/media/category-phones.png": "/react_phone-catalog/static/media/category-phones.464b59621d37fd37fbe8.png",
+    "static/media/cart.svg": "/react_phone-catalog/static/media/cart.1962e42406793fa66f0d.svg",
+    "static/media/favorites.svg": "/react_phone-catalog/static/media/favorites.670cf5136eb8aecd15dc.svg",
+    "static/media/cross.svg": "/react_phone-catalog/static/media/cross.6e7f15f7413e962f7549.svg",
+    "static/media/close.svg": "/react_phone-catalog/static/media/close.0594ac0ef702db8fbc79.svg",
+    "static/media/open.svg": "/react_phone-catalog/static/media/open.744ac0b04d84e4feeeb5.svg",
+    "static/media/arrow-up.svg": "/react_phone-catalog/static/media/arrow-up.dfbbf9e35fa2ce765e74.svg",
+    "static/media/slider-arrow-right.svg": "/react_phone-catalog/static/media/slider-arrow-right.6ea4dc179740ba122e44.svg",
+    "static/media/slider-arrow-left.svg": "/react_phone-catalog/static/media/slider-arrow-left.6b099a50c157f16fe043.svg",
+    "index.html": "/react_phone-catalog/index.html",
+    "main.fd51d1f8.css.map": "/react_phone-catalog/static/css/main.fd51d1f8.css.map",
+    "main.4cfab846.js.map": "/react_phone-catalog/static/js/main.4cfab846.js.map"
   },
   "entrypoints": [
-    "static/css/main.18762e65.css",
-    "static/js/main.f2d000b9.js"
+    "static/css/main.fd51d1f8.css",
+    "static/js/main.4cfab846.js"
   ]
 }
