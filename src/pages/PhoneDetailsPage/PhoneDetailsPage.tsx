@@ -78,14 +78,14 @@ export const PhoneDetailsPage = () => {
                         onClick={() => handleImgButton(img)}
                         className="details-top__button"
                       >
-                        <img src={`/${img}`} alt={`${index}`} />
+                        <img src={`${img}`} alt={`${index}`} />
                       </button>
                     </li>
                   ))}
                 </ul>
                 <div className="details-top__img">
                   <img
-                    src={!imgUrl ? `/${phone.images[0]}` : `/${imgUrl}`}
+                    src={!imgUrl ? `${phone.images[0]}` : `${imgUrl}`}
                     alt="Main image"
                   />
                 </div>

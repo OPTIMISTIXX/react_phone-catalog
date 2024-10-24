@@ -33,7 +33,7 @@ export const Aside: React.FC<Props> = ({ isAside, setIsAside }) => {
             <NavLink className="nav__link" to="./">
               <img
                 className="nav__logo logo"
-                src="../img/svg/logo.svg"
+                src="/img/svg/logo.svg"
                 alt="logo"
               />
             </NavLink>

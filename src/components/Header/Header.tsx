@@ -29,11 +29,7 @@ export const Header = () => {
       <header id="header" className="header">
         <nav className="header__nav nav">
           <NavLink className="nav__link" to="./">
-            <img
-              className="nav__logo logo"
-              src="/img/svg/logo.svg"
-              alt="logo"
-            />
+            <img className="nav__logo logo" src="img/svg/logo.svg" alt="logo" />
           </NavLink>
           <ul className="nav__list">
             <li className="nav__item">

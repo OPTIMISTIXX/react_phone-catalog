@@ -12,7 +12,7 @@ export const BreadCrumbs: React.FC<Props> = ({ pageName }) => {
         <img src="img/svg/home.svg" alt="home" />
       </Link>
       <div className="bread-crumbs__arrow">
-        <img src="/img/svg/arrow-left.svg" alt="arrow-left" />
+        <img src="img/svg/arrow-left.svg" alt="arrow-left" />
       </div>
       <div className="bread-crumbs__name">{pageName}</div>
     </div>

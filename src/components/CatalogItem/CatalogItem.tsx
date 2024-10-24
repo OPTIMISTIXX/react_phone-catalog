@@ -69,7 +69,7 @@ export const CatalogItem: React.FC<Props> = ({ phone }) => {
       <div className="grid-item__container grid-item__container--image">
         <img
           className="grid-item__image"
-          src={`/${phone.images[0]}`}
+          src={`${phone.images[0]}`}
           alt={phone.name}
         />
       </div>
@@ -121,9 +121,9 @@ export const CatalogItem: React.FC<Props> = ({ phone }) => {
             className="card-button__fav card-button__item"
           >
             {isFavActive ? (
-              <img src="../img/svg/favorites_active.svg" alt="fav_active" />
+              <img src="/img/svg/favorites_active.svg" alt="fav_active" />
             ) : (
-              <img src="../img/svg/favorites.svg" alt="fav" />
+              <img src="/img/svg/favorites.svg" alt="fav" />
             )}
           </button>
         </div>

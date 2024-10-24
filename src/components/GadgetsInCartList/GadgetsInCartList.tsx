@@ -39,7 +39,7 @@ export const GadgetsInCartList: React.FC<Props> = ({
 
   useEffect(() => {
     setSelectedPhonesInCartCount(
-      phonesInCart.reduce((acc, phone) => acc + phone.priceDiscount, 0),
+      phonesInCart.reduce((acc, phone) => acc + (phone.count || 0), 0),
     );
   }, [setSelectedPhonesInCartCount, phonesInCart, phones]);
 

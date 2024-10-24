@@ -66,7 +66,7 @@ export const GadgetInCartList: React.FC<Props> = ({
         X
       </button>
       <img
-        src={`/${phone.images[0]}`}
+        src={`${phone.images[0]}`}
         alt={phone.id}
         className="cart-item__icon"
       />
