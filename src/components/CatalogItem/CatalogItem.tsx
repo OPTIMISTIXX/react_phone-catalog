@@ -121,9 +121,9 @@ export const CatalogItem: React.FC<Props> = ({ phone }) => {
             className="card-button__fav card-button__item"
           >
             {isFavActive ? (
-              <img src="/img/svg/favorites_active.svg" alt="fav_active" />
+              <img src="img/svg/favorites_active.svg" alt="fav_active" />
             ) : (
-              <img src="/img/svg/favorites.svg" alt="fav" />
+              <img src="img/svg/favorites.svg" alt="fav" />
             )}
           </button>
         </div>

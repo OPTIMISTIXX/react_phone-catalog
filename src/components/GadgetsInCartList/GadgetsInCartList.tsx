@@ -22,8 +22,7 @@ export const GadgetsInCartList: React.FC<Props> = ({
 
   useEffect(() => {
     const total = phones.reduce(
-      (acc: number, phone: PhoneFromServer) =>
-        acc + (phone.priceRegular || 0) * phone.priceDiscount,
+      (acc: number, phone: PhoneFromServer) => acc + (phone.price || 0),
       0,
     );
 

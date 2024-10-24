@@ -7,7 +7,7 @@ import 'swiper/css/pagination';
 import './SwiperSlider.scss';
 
 const SwiperSlider = () => {
-  const images = ['/img/banners/4.svg', '/img/banners/1.png'];
+  const images = ['img/banners/4.svg', 'img/banners/1.png'];
 
   return (
     <Swiper

@@ -37,4 +37,5 @@ export type PhoneFromServer = {
   zoom: string;
   cell: string[];
   count?: number;
+  price?: number;
 };
